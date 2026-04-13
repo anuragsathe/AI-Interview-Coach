@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+streamlit
+sqlalchemy
+pydantic
+requests
+python-dotenv
+groq
+psycopg2-binary
