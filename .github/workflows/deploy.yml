@@ -30,6 +30,10 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        env:
+          TF_VAR_groq_api_key: ${{ secrets.GROQ_API_KEY }}
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        env:
+          TF_VAR_groq_api_key: ${{ secrets.GROQ_API_KEY }}

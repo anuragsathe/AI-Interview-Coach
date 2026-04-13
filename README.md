@@ -83,6 +83,33 @@ streamlit run frontend/app.py
 
 ---
 
+## ☁️ Infrastructure & Deployment
+
+The project is configured for automated deployment to AWS using **Terraform** and **GitHub Actions**.
+
+### 🏗️ Infrastructure as Code (Terraform)
+The infrastructure is defined in the `terraform/` directory. It provisions:
+- An **AWS EC2** instance (`t2.micro`) in `ap-south-1`.
+- Automatic installation of dependencies and application startup via `user_data`.
+
+### 🚀 CI/CD Pipeline (GitHub Actions)
+The deployment is automated via `.github/workflows/deploy.yml`. 
+- **Trigger**: Every push to the `main` branch.
+- **Workflow**:
+  1. Sets up Terraform.
+  2. Configures AWS credentials.
+  3. Runs `terraform init` and `terraform apply`.
+
+### 🔐 Setup Requirements
+To use the CI/CD pipeline, you must:
+1.  **Add Secrets**: Go to your GitHub repository **Settings > Secrets and variables > Actions** and add:
+    - `AWS_ACCESS_KEY_ID`: Your AWS Access Key.
+    - `AWS_SECRET_ACCESS_KEY`: Your AWS Secret Key.
+2.  **EC2 Key Pair**: Ensure you have an EC2 Key Pair named `ai-key` in the `ap-south-1` region.
+3.  **Security Groups**: After the first deployment, ensure port `8000` is open in the EC2 Security Group to allow traffic to the FastAPI backend.
+
+---
+
 ## 🤝 Contributing
 Contributions are welcome! Please feel free to submit a Pull Request or open an issue for any bugs or feature requests.
 
